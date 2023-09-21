@@ -49,7 +49,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty 
 
 # kill focused window
 bindsym $mod+q kill
@@ -188,11 +188,31 @@ bindsym $mod+r mode "resize"
 # disable title bar
 for_window [class="^.*"] border pixel 1
 gaps top 50px
-gaps left 10px
-gaps right 10px
-exec_always --no-startup-id ~/.config/polybar/launch.sh & 
+gaps left 20px
+gaps right 20px
+gaps bottom 20px
+exec_always --no-startup-id ~/.config/polybar/launch.sh  
 # Switch between US and BR keyboard layouts
 # Switch between US and BR keyboard layouts
 bindsym Mod4+space exec --no-startup-id "setxkbmap -query | grep -q 'layout:\s*us' && setxkbmap br || setxkbmap us"
-exec_always --no-startup-id nitrogen --restore &
-exec_always --no-startup-id picom & 
+# Adding print to system
+bindsym Print exec --no-startup-id flameshot gui
+bindsym XF86AudioPlay exec playerctl play-pause
+# setting up my monitors 
+exec --no-startup-id ~/.config/i3/monitor.sh
+# App responsible for wallpaper
+
+# App for responsible for transparent terminal
+exec_always --no-startup-id picom  
+for_window [class="Polybar"] floating enable
+# Starts network manager applet
+exec --no-startup-id nm-applet
+exec --no-startup-id flameshot 
+# Adding notification server
+exec_always --no-startup-id /usr/bin/xfce4-notifyd
+exec --no-startup-id nitrogen --restore
+# AutoStart applications for work
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/kitty'
+exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/kitty'
+exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 4; exec /usr/bin/slack'
