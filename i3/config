@@ -182,26 +182,31 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # disable title bar
-for_window [class="^.*"] border pixel 1
-gaps top 50px
-gaps left 20px
-gaps right 20px
-gaps bottom 20px
+for_window [class="^.*"] border pixel 4
+########Colors
+gaps top 40px
+# gaps left 20px
+# gaps right 20px
+# gaps bottom 20px
+gaps inner 10
 exec_always --no-startup-id ~/.config/polybar/launch.sh  
+# Change the border color for focused windows to purple
+
 # Switch between US and BR keyboard layouts
 # Switch between US and BR keyboard layouts
 bindsym Mod4+space exec --no-startup-id "setxkbmap -query | grep -q 'layout:\s*us' && setxkbmap br || setxkbmap us"
+bindsym Mod4+p move workspace to output right
 # Adding print to system
 bindsym Print exec --no-startup-id flameshot gui
 bindsym XF86AudioPlay exec playerctl play-pause
 # setting up my monitors 
 exec --no-startup-id ~/.config/i3/monitor.sh
 # App responsible for wallpaper
-
+exec --no-startup-id feh --bg-scale ~/Pictures/onda.jpg 
+# Moving workspaces between screens 
 # App for responsible for transparent terminal
 exec_always --no-startup-id picom  
 for_window [class="Polybar"] floating enable
@@ -210,7 +215,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id flameshot 
 # Adding notification server
 exec_always --no-startup-id /usr/bin/xfce4-notifyd
-exec --no-startup-id nitrogen --restore
 # AutoStart applications for work
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/kitty'
 exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/kitty'
